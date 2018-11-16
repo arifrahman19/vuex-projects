@@ -10,21 +10,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/todos': {
-        target: 'http://localhost:8081/',
+      '*': {
+        target: 'http://localhost:1337/',
         changeOrigin: false,
         secure: false
-      },
-      '/register/*': {
-        target: 'http://localhost:8081/',
-        changeOrigin: false,
-        secure: false
-      },
-      '/todoapp': {
-        target: 'http://localhost:8081/',
-        changeOrigin: false,
-        secure: false,
-        ws: true
       }
     },
     // Various Dev Server settings

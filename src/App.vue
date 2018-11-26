@@ -1,25 +1,18 @@
 <template>
   <div>
-    <div align="center">  
-      <h2>
-        Table Pasien
-      </h2>
-    </div>
-    <action-bar/>
+    <div align="center"><h2>Table Pasien</h2></div>
+    <action-bar />
     <el-row>
-      <el-col 
-        :span="16" 
-        style="padding-right:10px;padding-left:10px">
-        <list-pasien @edit="onEditPasien"/>
+      <el-col :span="16" style="padding-right:10px;padding-left:10px">
+        <list-pasien @edit="onEditPasien" />
       </el-col>
-      <el-col :span="8">
-        <form-detail-pasien @edit="onEditPasien"/>
-      </el-col>
+      <el-col :span="8"> <form-detail-pasien @edit="onEditPasien" /> </el-col>
     </el-row>
     <form-tambah-pasien />
-    <form-edit-pasien 
-      :dialog-visible.sync="open_dialog_edit_pasien" 
-      :pasien="pasienEdit" />
+    <form-edit-pasien
+      :dialog-visible.sync="open_dialog_edit_pasien"
+      :pasien="pasienEdit"
+    />
   </div>
 </template>
 <script>

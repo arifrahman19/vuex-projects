@@ -1,60 +1,45 @@
 <template>
-  <div >
-    <el-form
-      label-position="left" 
-      style="padding: 20px" 
-      label-width="95px">
+  <div>
+    <el-form label-position="left" style="padding: 20px" label-width="95px">
       <el-form-item label="No. RM">
-        <el-input 
-          v-model="no_rm" 
-          disabled/>
+        <el-input v-model="no_rm" disabled />
       </el-form-item>
       <el-form-item label="Nama">
-        <el-input 
-          v-model="nama" 
-          disabled/>
+        <el-input v-model="nama" disabled />
       </el-form-item>
       <el-form-item label="Jenis Kelamin">
-        <el-select 
-          v-model="jenis_kelamin" 
+        <el-select
+          v-model="jenis_kelamin"
           disabled
-          placeholder="pilih jenis kelamin">
-          <el-option 
-            label="Laki-Laki" 
-            value="L"/>
-          <el-option 
-            label="Perempuan" 
-            value="P"/>
+          placeholder="pilih jenis kelamin"
+        >
+          <el-option label="Laki-Laki" value="L" />
+          <el-option label="Perempuan" value="P" />
         </el-select>
       </el-form-item>
       <el-form-item label="Tanggal Lahir">
-        <el-date-picker 
+        <el-date-picker
           v-model="tanggal_lahir"
-          disabled 
+          disabled
           format="yyyy-MM-dd"
           value-format="yyyy-MM-dd"
-          type="date" 
-          placeholder="Pick a date" 
-          style="width: 100%;"/>
+          type="date"
+          placeholder="Pick a date"
+          style="width: 100%;"
+        />
       </el-form-item>
       <el-form-item label="No. Telhone">
-        <el-input 
-          v-model="no_telphone"
-          disabled/>
+        <el-input v-model="no_telphone" disabled />
       </el-form-item>
       <el-form-item label="alamat">
-        <el-input 
-          v-model="alamat" 
-          disabled
-          type="textarea"/>
+        <el-input v-model="alamat" disabled type="textarea" />
       </el-form-item>
       <el-form-item>
-        <el-button 
-          type="primary" 
-          @click="onEdit">Edit</el-button>
+        <el-button type="primary" @click="onEdit">Edit</el-button>
       </el-form-item>
     </el-form>
-</div></template>
+  </div>
+</template>
 <script>
 export default {
   computed: {

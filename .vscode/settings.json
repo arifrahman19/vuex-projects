@@ -20,6 +20,7 @@
      "autoFix": true
     }
    ],
+   "html.format.wrapAttributes": "aligned-multiple",
    "eslint.alwaysShowStatus": true,
    "eslint.autoFixOnSave": true,
    "vetur.format.defaultFormatter.js": "prettier",

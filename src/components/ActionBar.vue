@@ -2,35 +2,27 @@
   <div>
     <el-row>
       <el-col :span="2">
-        <el-button
-          circle
-          size="small"
-          type="primary"
-          @click="refresh()">
-          <i class="el-icon-refresh"/>
+        <el-button circle size="small" type="primary" @click="refresh();">
+          <i class="el-icon-refresh" />
         </el-button>
         <el-button
           circle
           size="small"
           type="primary"
-          @click="handlerTambahPasien()" >
-          <i class="el-icon-circle-plus-outline"/>
+          @click="handlerTambahPasien();"
+        >
+          <i class="el-icon-circle-plus-outline" />
         </el-button>
       </el-col>
       <el-col :span="7">
-        <el-input 
-          v-model="keyword" 
-          placeholder="Please input" >
-          <el-button 
-            slot="append"
-            icon="el-icon-search" 
-            @click="find"/>
+        <el-input v-model="keyword" placeholder="Please input">
+          <el-button slot="append" icon="el-icon-search" @click="find" />
         </el-input>
       </el-col>
-      <el-col :span="4"><div class="grid-content bg-purple"/></el-col>
-      <el-col :span="4"><div class="grid-content bg-purple-light"/></el-col>
-      <el-col :span="4"><div class="grid-content bg-purple"/></el-col>
-      <el-col :span="4"><div class="grid-content bg-purple-light"/></el-col>
+      <el-col :span="4"> <div class="grid-content bg-purple" /> </el-col>
+      <el-col :span="4"> <div class="grid-content bg-purple-light" /> </el-col>
+      <el-col :span="4"> <div class="grid-content bg-purple" /> </el-col>
+      <el-col :span="4"> <div class="grid-content bg-purple-light" /> </el-col>
     </el-row>
   </div>
 </template>

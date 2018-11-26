@@ -1,22 +1,11 @@
 <template>
   <div>
-       
-    <span>
-      <el-button
-        circle
-        size="small"
-        type="primary"
-        @click="refresh()">
-        <i class="el-icon-refresh"/>
-      </el-button>
-      <el-button
-        circle
-        size="small"
-        type="primary"
-        @click="tambah_pasien_event()" >
-        <i class="el-icon-circle-plus-outline"/>
-      </el-button>
-    </span>    
+    <div align="center">  
+      <h2>
+        Table Pasien
+      </h2>
+    </div>
+    <action-bar/>
     <el-row>
       <el-col 
         :span="16" 
@@ -27,7 +16,7 @@
         <form-detail-pasien @edit="onEditPasien"/>
       </el-col>
     </el-row>
-    <form-tambah-pasien :dialog-visible.sync="open_dialog_tambah_pasien"/>
+    <form-tambah-pasien />
     <form-edit-pasien 
       :dialog-visible.sync="open_dialog_edit_pasien" 
       :pasien="pasienEdit" />
@@ -35,15 +24,17 @@
 </template>
 <script>
 import FormEditPasien from "@/components/FormEditPasien";
-import ListPasien from "@/components/ListPasien";
+import ListPasien from "@/components/TablePasien";
 import FormTambahPasien from "@/components/FormTambahPasien";
 import FormDetailPasien from "@/components/FormDetailPasien";
+import ActionBar from "@/components/ActionBar";
 export default {
   components: {
     FormEditPasien,
     ListPasien,
     FormTambahPasien,
-    FormDetailPasien
+    FormDetailPasien,
+    ActionBar
   },
   data() {
     return {
@@ -56,9 +47,7 @@ export default {
         no_telphone: null,
         alamat: null
       },
-      open_dialog_edit_pasien: false,
-      open_dialog_tambah_pasien: false,
-      title: "Starter project with ESLint and Prettier integration"
+      open_dialog_edit_pasien: false
     };
   },
   methods: {
@@ -68,19 +57,6 @@ export default {
     onEditPasien(pasien) {
       this.pasienEdit = Object.assign({}, pasien);
       this.open_dialog_edit_pasien = true;
-    },
-    refresh: function() {
-      this.loadingForm = true;
-      this.$store
-        .dispatch("refresh")
-        .then(result => {
-          this.$message.success("Refresh success");
-          this.loadingForm = false;
-        })
-        .catch(err => {
-          this.$message.error(JSON.stringify(err));
-          this.loadingForm = false;
-        });
     }
   },
   template: {}

@@ -12,7 +12,8 @@ module.exports = {
     // https://github.com/standard/eslint-config-standard
     // https://github.com/prettier/eslint-config-prettier
     // https://github.com/vuejs/eslint-plugin-vue
-    extends: ["prettier", "prettier/standard", "plugin:vue/recommended"],
+    // extends: ["prettier", "prettier/standard", "plugin:vue/recommended"],
+    extends: ['plugin:vue/essential'],
     // vue required to lint *.vue files
     // https://github.com/vuejs/eslint-plugin-vue
     // https://github.com/prettier/eslint-plugin-prettier

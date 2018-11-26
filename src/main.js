@@ -6,7 +6,7 @@ import router from "./router";
 import ElementUI from "element-ui";
 import locale from "element-ui/lib/locale/lang/en";
 import "element-ui/lib/theme-chalk/index.css";
-import { store } from "./state/index";
+import { store } from "./store/index";
 import * as socketIoClient from "socket.io-client";
 import * as sailsIo from "sails.io.js";
 import { Message } from "element-ui";

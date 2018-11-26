@@ -1,28 +1,22 @@
 <template>
   <div >
-    <div align="center">
-      <h2>Detail pasien</h2>
-    </div>
-    <el-form 
-      v-loading="loadingForm"
-      ref="form"
-      :model="form"
+    <el-form
       label-position="left" 
       style="padding: 20px" 
       label-width="95px">
       <el-form-item label="No. RM">
         <el-input 
-          v-model="form.no_rm" 
+          v-model="no_rm" 
           disabled/>
       </el-form-item>
       <el-form-item label="Nama">
         <el-input 
-          v-model="form.nama" 
+          v-model="nama" 
           disabled/>
       </el-form-item>
       <el-form-item label="Jenis Kelamin">
         <el-select 
-          v-model="form.jenis_kelamin" 
+          v-model="jenis_kelamin" 
           disabled
           placeholder="pilih jenis kelamin">
           <el-option 
@@ -35,7 +29,7 @@
       </el-form-item>
       <el-form-item label="Tanggal Lahir">
         <el-date-picker 
-          v-model="form.tanggal_lahir"
+          v-model="tanggal_lahir"
           disabled 
           format="yyyy-MM-dd"
           value-format="yyyy-MM-dd"
@@ -45,12 +39,12 @@
       </el-form-item>
       <el-form-item label="No. Telhone">
         <el-input 
-          v-model="form.no_telphone"
+          v-model="no_telphone"
           disabled/>
       </el-form-item>
       <el-form-item label="alamat">
         <el-input 
-          v-model="form.alamat" 
+          v-model="alamat" 
           disabled
           type="textarea"/>
       </el-form-item>
@@ -63,27 +57,71 @@
 </div></template>
 <script>
 export default {
-  data() {
-    return {
-      loadingForm: false,
-      form1: {
-        no_rm: null,
-        nama: null,
-        jenis_kelamin: null,
-        tanggal_lahir: null,
-        no_telphone: null,
-        alamat: null
-      }
-    };
-  },
   computed: {
-    form() {
-      return this.$store.state.detail_pasien;
+    id: {
+      get() {
+        return this.$store.state.FormDetailPasien.id;
+      }
+    },
+    no_rm: {
+      get() {
+        return this.$store.state.FormDetailPasien.no_rm;
+      },
+      set(value) {
+        this.$store.commit("FormDetailPasien/no_rm", value);
+      }
+    },
+    nama: {
+      get() {
+        return this.$store.state.FormDetailPasien.nama;
+      },
+      set(value) {
+        this.$store.commit("FormDetailPasien/nama", value);
+      }
+    },
+    jenis_kelamin: {
+      get() {
+        return this.$store.state.FormDetailPasien.jenis_kelamin;
+      },
+      set(value) {
+        this.$store.commit("FormDetailPasien/jenis_kelamin", value);
+      }
+    },
+    tanggal_lahir: {
+      get() {
+        return this.$store.state.FormDetailPasien.tanggal_lahir;
+      },
+      set(value) {
+        this.$store.commit("FormDetailPasien/tanggal_lahir", value);
+      }
+    },
+    no_telphone: {
+      get() {
+        return this.$store.state.FormDetailPasien.no_telphone;
+      },
+      set(value) {
+        this.$store.commit("FormDetailPasien/no_telphone", value);
+      }
+    },
+    alamat: {
+      get() {
+        return this.$store.state.FormDetailPasien.alamat;
+      },
+      set(value) {
+        this.$store.commit("FormDetailPasien/alamat", value);
+      }
     }
   },
   methods: {
     onEdit() {
-      this.$emit("edit", this.$store.state.detail_pasien);
+      this.$store.commit("FormEditPasien/dialogVisible", true);
+      this.$store.commit("FormEditPasien/id", this.id);
+      this.$store.commit("FormEditPasien/no_rm", this.no_rm);
+      this.$store.commit("FormEditPasien/nama", this.nama);
+      this.$store.commit("FormEditPasien/jenis_kelamin", this.jenis_kelamin);
+      this.$store.commit("FormEditPasien/tanggal_lahir", this.tanggal_lahir);
+      this.$store.commit("FormEditPasien/no_telphone", this.no_telphone);
+      this.$store.commit("FormEditPasien/alamat", this.alamat);
     }
   }
 };

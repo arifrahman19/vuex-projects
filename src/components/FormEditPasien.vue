@@ -1,17 +1,31 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" title="Edit pasien" width="30%">
+  <el-dialog
+    :visible="dialogVisible"
+    @update:visible="setDialogVisible"
+    title="Edit pasien"
+    width="30%"
+  >
     <el-form v-loading="loadingForm" label-position="left" label-width="95px">
-      <el-form-item label="No. RM"> <el-input v-model="no_rm" /> </el-form-item>
-      <el-form-item label="Nama"> <el-input v-model="nama" /> </el-form-item>
+      <el-form-item label="No. RM">
+        <el-input :value="no_rm" @input="setNoRM" />
+      </el-form-item>
+      <el-form-item label="Nama">
+        <el-input :value="nama" @input="setNama" />
+      </el-form-item>
       <el-form-item label="Jenis Kelamin">
-        <el-select v-model="jenis_kelamin" placeholder="pilih jenis kelamin">
+        <el-select
+          :value="jenis_kelamin"
+          @input="setJenisKelamin"
+          placeholder="pilih jenis kelamin"
+        >
           <el-option label="Laki-Laki" value="L" />
           <el-option label="Perempuan" value="P" />
         </el-select>
       </el-form-item>
       <el-form-item label="Tanggal Lahir">
         <el-date-picker
-          v-model="tanggal_lahir"
+          :value="tanggal_lahir"
+          @input="setTanggalLahir"
           format="yyyy-MM-dd"
           value-format="yyyy-MM-dd"
           type="date"
@@ -20,125 +34,51 @@
         />
       </el-form-item>
       <el-form-item label="No. Telhone">
-        <el-input v-model="no_telphone" />
+        <el-input :value="no_telphone" @input="setNoTelphone" />
       </el-form-item>
       <el-form-item label="alamat">
-        <el-input v-model="alamat" type="textarea" />
+        <el-input :value="alamat" @input="setAlamat" type="textarea" />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">Simpan</el-button>
+        <el-button type="primary" @click="onSimpanEditPasien">Simpan</el-button>
         <el-button>Cancel</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
 </template>
+
 <script>
+import { mapState } from "vuex";
+import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 export default {
-  // props: {
-  // dialogVisible: {
-  //   type: Boolean,
-  //   required: true
-  // },
-  // pasien: {
-  //   type: Object,
-  //   required: true
-  // }
-  // },
-  data() {
-    return {
-      // loadingForm: false
-    };
-  },
   computed: {
-    loadingForm: {
-      get() {
-        return this.$store.state.FormEditPasien.loadingForm;
-      },
-      set(value) {
-        this.$store.commit("FormEditPasien/loadingForm", value);
-      }
-    },
-    dialogVisible: {
-      get() {
-        return this.$store.state.FormEditPasien.dialogVisible;
-      },
-      set(value) {
-        this.$store.commit("FormEditPasien/dialogVisible", value);
-      }
-    },
-    id: {
-      get() {
-        return this.$store.state.FormEditPasien.id;
-      }
-    },
-    no_rm: {
-      get() {
-        return this.$store.state.FormEditPasien.no_rm;
-      },
-      set(value) {
-        this.$store.commit("FormEditPasien/no_rm", value);
-      }
-    },
-    nama: {
-      get() {
-        return this.$store.state.FormEditPasien.nama;
-      },
-      set(value) {
-        this.$store.commit("FormEditPasien/nama", value);
-      }
-    },
-    jenis_kelamin: {
-      get() {
-        return this.$store.state.FormEditPasien.jenis_kelamin;
-      },
-      set(value) {
-        this.$store.commit("FormEditPasien/jenis_kelamin", value);
-      }
-    },
-    tanggal_lahir: {
-      get() {
-        return this.$store.state.FormEditPasien.tanggal_lahir;
-      },
-      set(value) {
-        this.$store.commit("FormEditPasien/tanggal_lahir", value);
-      }
-    },
-    no_telphone: {
-      get() {
-        return this.$store.state.FormEditPasien.no_telphone;
-      },
-      set(value) {
-        this.$store.commit("FormEditPasien/no_telphone", value);
-      }
-    },
-    alamat: {
-      get() {
-        return this.$store.state.FormEditPasien.alamat;
-      },
-      set(value) {
-        this.$store.commit("FormEditPasien/alamat", value);
-      }
-    }
+    ...mapState("FormEditPasien", {
+      loadingForm: state => state.loadingForm,
+      dialogVisible: state => state.dialogVisible,
+      id: state => state.id,
+      no_rm: state => state.no_rm,
+      nama: state => state.nama,
+      jenis_kelamin: state => state.jenis_kelamin,
+      tanggal_lahir: state => state.tanggal_lahir,
+      no_telphone: state => state.no_telphone,
+      alamat: state => state.alamat
+    })
   },
   methods: {
-    async onSubmit() {
-      this.loadingForm = true;
-      try {
-        var respond = await this.$store.dispatch("FormEditPasien/edit", {
-          id: this.id,
-          no_rm: this.no_rm,
-          nama: this.nama,
-          jenis_kelamin: this.jenis_kelamin,
-          tanggal_lahir: this.tanggal_lahir,
-          no_telphone: this.no_telphone,
-          alamat: this.alamat
-        });
-      } catch (error) {
-        this.$message.error("error edit " + error);
-      }
-      this.loadingForm = false;
-      this.dialogVisible = false;
-    }
+    ...mapMutations("FormEditPasien", {
+      setNoRM: "no_rm",
+      setNama: "nama",
+      setId: "id",
+      setDialogVisible: "dialogVisible",
+      setJenisKelamin: "jenis_kelamin",
+      setTanggalLahir: "tanggal_lahir",
+      setNoTelphone: "no_telphone",
+      setAlamat: "alamat"
+    }),
+    ...mapActions({
+      onSimpanEditPasien: "FormEditPasien/editPasienAction"
+    })
   }
 };
 </script>

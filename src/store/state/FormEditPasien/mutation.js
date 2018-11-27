@@ -28,5 +28,15 @@ export default {
   },
   alamat(state, value) {
     state.alamat = value;
+  },
+  handlerEdit(state, pasien) {
+    state.dialogVisible = true;
+    state.id = pasien.id;
+    state.alamat = pasien.alamat;
+    state.nama = pasien.nama;
+    state.jenis_kelamin = pasien.jenis_kelamin;
+    state.no_rm = pasien.no_rm;
+    state.tanggal_lahir = pasien.tanggal_lahir;
+    state.no_telphone = pasien.no_telphone;
   }
 };

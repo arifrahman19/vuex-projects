@@ -41,7 +41,7 @@ export default {
         "/api/v1/pasien/filter?nama=" +
           inputs.name +
           "&page=" +
-          inputs.page +
+          (inputs.page - 1) +
           "&page_size=" +
           inputs.page_size
       )

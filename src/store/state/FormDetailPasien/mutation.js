@@ -19,5 +19,14 @@ export default {
   },
   alamat(state, value) {
     state.alamat = value;
+  },
+  setDetail(state, row) {
+    state.id = row.id;
+    state.alamat = row.alamat;
+    state.nama = row.nama;
+    state.jenis_kelamin = row.jenis_kelamin;
+    state.no_rm = row.no_rm;
+    state.tanggal_lahir = row.tanggal_lahir;
+    state.no_telphone = row.no_telphone;
   }
 };

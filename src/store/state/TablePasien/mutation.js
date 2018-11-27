@@ -9,7 +9,6 @@ export default {
     state.loadingData = false;
   },
   loadingData(state, value) {
-    console.log("loading data" + value);
     state.loadingData = value;
   },
   total(state, value) {

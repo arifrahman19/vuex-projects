@@ -1,20 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="2">
-        <el-button circle size="small" type="primary" @click="refreshAction();">
-          <i class="el-icon-refresh" />
-        </el-button>
-        <el-button
-          circle
-          size="small"
-          type="primary"
-          @click="handlerTambahPasien(true);"
-        >
-          <i class="el-icon-circle-plus-outline" />
-        </el-button>
-      </el-col>
-      <el-col :span="7">
+      <el-col :md="20" :xs="24" :sm="12" style="text-align:center">
         <el-input
           :value="keyword"
           @input="updateKeyword"
@@ -23,10 +10,20 @@
           <el-button slot="append" icon="el-icon-search" @click="onSearch" />
         </el-input>
       </el-col>
-      <el-col :span="4"> <div class="grid-content bg-purple" /> </el-col>
-      <el-col :span="4"> <div class="grid-content bg-purple-light" /> </el-col>
-      <el-col :span="4"> <div class="grid-content bg-purple" /> </el-col>
-      <el-col :span="4"> <div class="grid-content bg-purple-light" /> </el-col>
+      <el-col :md="4" :xs="24" :sm="12">
+        <el-button
+          round
+          size="medium"
+          type="primary"
+          style="float: right"
+          @click="handlerTambahPasien(true);"
+        >
+          <i class="el-icon-circle-plus-outline" /> Tambah Pasien
+        </el-button>
+        <el-button round size="medium" type="primary" @click="refreshAction();">
+          <i class="el-icon-refresh" />
+        </el-button>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -54,3 +51,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.el-input-group {
+  width: 50% !important;
+  text-align: center;
+}
+</style>

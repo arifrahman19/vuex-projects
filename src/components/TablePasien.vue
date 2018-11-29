@@ -1,12 +1,13 @@
 <template>
-  <div style="margin-top:20px">
+  <div style="margin-top:20px;">
     <el-table
       v-loading="loadingData"
       :data="tableData"
       border
       @row-click="rowClick"
+      style="width: 100%"
     >
-      <el-table-column prop="no_rm" label="No. RM" width="80" />
+      <el-table-column prop="no_rm" label="No. RM" width="100" />
       <el-table-column prop="nama" label="Nama" width="130" />
       <el-table-column prop="tanggal_lahir" label="Tanggal lahir" width="110" />
       <el-table-column prop="jenis_kelamin" label="Jenis" width="60" />
@@ -14,7 +15,7 @@
       <el-table-column prop="no_telphone" label="Telphone" />
       <el-table-column prop="created" label="created" width="80" />
       <el-table-column prop="updated" label="updated" width="80" />
-      <el-table-column width="60" label="Aksi">
+      <el-table-column width="100" label="Aksi">
         <template slot-scope="scope">
           <el-button
             circle
@@ -47,46 +48,3 @@
     />
   </div>
 </template>
-<script>
-import { commit } from "vuex";
-import { mapState } from "vuex";
-import { mapMutations } from "vuex";
-import { mapActions } from "vuex";
-export default {
-  computed: {
-    ...mapState({
-      tableData: state => state.TablePasien.pasiens,
-      loadingData: state => state.TablePasien.loadingData,
-      page: state => state.TablePasien.page,
-      total: state => state.TablePasien.total,
-      page_size: state => state.TablePasien.page_size
-    })
-  },
-  methods: {
-    ...mapMutations({
-      setTablePage: "TablePasien/page",
-      setFormDetailPasien: "FormDetailPasien/setDetail",
-      setFormEditPasien: "FormEditPasien/handlerEdit"
-    }),
-    ...mapActions({
-      refreshTableAction: "TablePasien/refresh",
-      deleteTableAction: "TablePasien/delete"
-    }),
-    handleChangePage(val) {
-      this.setTablePage(val);
-      this.refreshTableAction();
-    },
-    rowClick(row, event, column) {
-      if (column.label !== "Aksi") {
-        this.setFormDetailPasien(row);
-      }
-    },
-    handleEdit(index, row) {
-      this.setFormEditPasien(row);
-    },
-    handleDelete: async function(index, row) {
-      this.deleteTableAction(row);
-    }
-  }
-};
-</script>

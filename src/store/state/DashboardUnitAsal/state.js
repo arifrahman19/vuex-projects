@@ -1,4 +1,6 @@
 export default {
+  visibleDetail: false,
+  visibleDialogAdd: false,
   loadingData: false,
   total: 0,
   page: 1,

@@ -8,11 +8,13 @@
 import Sidebar from "./components/Sidebar";
 import DashboardUnitAsal from "./components/datamaster_unitasal/DashboardUnitAsal";
 import FormInputUnitAsal from "./components/datamaster_unitasal/FormInputUnitAsal";
+import FormEditUnitAsal from "./components/datamaster_unitasal/FormEditUnitAsal";
 export default {
   components: {
     Sidebar,
     DashboardUnitAsal,
-    FormInputUnitAsal
+    FormInputUnitAsal,
+    FormEditUnitAsal
   }
 };
 </script>

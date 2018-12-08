@@ -19,7 +19,7 @@
           icon="el-icon-plus"
           size="small"
           class="btn-tambah-unit"
-          @click="openDialog();"
+          @click="setVisibleDialog(true);"
           >Tambah Data</el-button
         >
       </el-col>
@@ -28,7 +28,7 @@
     <!-- title dan button -->
     <!-- table -->
     <el-col :md="24">
-      <el-table :data="tableData" stripe class="table-unit">
+      <el-table :data="tableData" stripe class="table-unit" @row-click="detail">
         <el-table-column prop="kode" label="Kode Unit Asal" align="center">
         </el-table-column>
         <el-table-column prop="nama" label="Nama Unit asal" align="center">
@@ -54,10 +54,9 @@
         </span>
       </el-dialog>
     -->
-    <form-input-unit-asal
-      v-show="showDialogAdd"
-      @closeDialogAdd="addCloseDialogAdd"
-    />
+    <view-detail-unit-asal v-show="visibleDetail" />
+    <form-input-unit-asal v-show="visibleDialogAdd" />
+    <!-- <form-edit-unit-asal v-show="visibleDialogAdd" /> -->
     <!-- table -->
     <!--
       <el-col :md="24">
@@ -77,16 +76,20 @@
 
 <script>
 import axios from "axios";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import FormInputUnitAsal from "@/components/datamaster_unitasal/FormInputUnitAsal";
+import FormEditUnitAsal from "@/components/datamaster_unitasal/FormEditUnitAsal";
+import ViewDetailUnitAsal from "@/components/datamaster_unitasal/ViewDetailUnitAsal";
 export default {
-  data() {
-    return {
-      showDialogAdd: false
-    };
-  },
+  // data() {
+  //   return {
+  //     showDialogAdd: false
+  //   };
+  // },
   components: {
-    FormInputUnitAsal
+    FormInputUnitAsal,
+    FormEditUnitAsal,
+    ViewDetailUnitAsal
   },
   computed: {
     // tableData: function() {
@@ -112,6 +115,8 @@ export default {
     //   ];
     // },
     ...mapState({
+      visibleDetail: state => state.DashboardUnitAsal.visibleDetail,
+      visibleDialogAdd: state => state.DashboardUnitAsal.visibleDialogAdd,
       tableData: state => state.DashboardUnitAsal.unitasal,
       loadingData: state => state.DashboardUnitAsal.loadingData,
       total: state => state.DashboardUnitAsal.total,
@@ -120,12 +125,28 @@ export default {
     })
   },
   methods: {
+    ...mapActions({
+      loadUnitAsal: "DashboardUnitAsal/loadUnitAsal",
+      showDetail: "DashboardUnitAsal/showDetail"
+    }),
+    ...mapMutations({
+      setVisibleDialog: "DashboardUnitAsal/SET_VISIBLE_DIALOG",
+      setVisibleDetail: "DashboardUnitAsal/SET_VISIBLE_DETAIL"
+    }),
     openDialog() {
-      this.showDialogAdd = true;
-      console.log("openDialog : " + this.showDialogAdd);
+      // this.setVisibleDialog(true);
+      // this.visibleDialogAdd = true;
+      // this.showDialogAdd = true;
+      // console.log("openDialog : " + this.showDialogAdd);
     },
     addCloseDialogAdd() {
       this.showDialogAdd = false;
+    },
+    detail(value) {
+      this.showDetail(true);
+      this.setVisibleDetail = true;
+      console.log("value :" + JSON.stringify(value));
+      console.log(this.setVisibleDetail);
     }
     // handleClose(done) {
     //   this.$confirm("Are you sure to close this dialog?")
@@ -145,6 +166,7 @@ export default {
     // })
   },
   mounted() {
+    this.loadUnitAsal();
     // this.$store.commit("DashboardUnitAsal/SET_UNITASAL", [
     //   {
     //     created: "2018-12-05T12:21:40.000Z",

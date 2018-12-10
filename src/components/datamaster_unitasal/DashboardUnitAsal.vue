@@ -78,7 +78,6 @@
 import axios from "axios";
 import { mapState, mapActions, mapMutations } from "vuex";
 import FormInputUnitAsal from "@/components/datamaster_unitasal/FormInputUnitAsal";
-import FormEditUnitAsal from "@/components/datamaster_unitasal/FormEditUnitAsal";
 import ViewDetailUnitAsal from "@/components/datamaster_unitasal/ViewDetailUnitAsal";
 export default {
   // data() {
@@ -88,7 +87,6 @@ export default {
   // },
   components: {
     FormInputUnitAsal,
-    FormEditUnitAsal,
     ViewDetailUnitAsal
   },
   computed: {
@@ -115,8 +113,9 @@ export default {
     //   ];
     // },
     ...mapState({
-      visibleDetail: state => state.DashboardUnitAsal.visibleDetail,
-      visibleDialogAdd: state => state.DashboardUnitAsal.visibleDialogAdd,
+      visibleDetail: state => state.ViewDetailUnitAsal.visibleDetail,
+      visibleEditAdd: state => state.FormEditUnitAsal.visibleEditAdd,
+      visibleDialogAdd: state => state.FormInputUnitAsal.visibleDialogAdd,
       tableData: state => state.DashboardUnitAsal.unitasal,
       loadingData: state => state.DashboardUnitAsal.loadingData,
       total: state => state.DashboardUnitAsal.total,
@@ -127,11 +126,12 @@ export default {
   methods: {
     ...mapActions({
       loadUnitAsal: "DashboardUnitAsal/loadUnitAsal",
-      showDetail: "DashboardUnitAsal/showDetail"
+      showDetail: "ViewDetailUnitAsal/showDetail"
     }),
     ...mapMutations({
-      setVisibleDialog: "DashboardUnitAsal/SET_VISIBLE_DIALOG",
-      setVisibleDetail: "DashboardUnitAsal/SET_VISIBLE_DETAIL"
+      setVisibleDialog: "FormInputUnitAsal/SET_VISIBLE_DIALOG",
+      setVisibleDetail: "ViewDetailUnitAsal/SET_VISIBLE_DETAIL",
+      setDetail: "ViewDetailUnitAsal/SET_DETAIL"
     }),
     openDialog() {
       // this.setVisibleDialog(true);
@@ -147,6 +147,7 @@ export default {
       this.setVisibleDetail = true;
       console.log("value :" + JSON.stringify(value));
       console.log(this.setVisibleDetail);
+      this.setDetail(value);
     }
     // handleClose(done) {
     //   this.$confirm("Are you sure to close this dialog?")

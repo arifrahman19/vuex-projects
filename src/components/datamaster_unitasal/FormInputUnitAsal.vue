@@ -13,7 +13,7 @@
             <button
               type="button"
               aria-label="Close"
-              @click="closeDialog();"
+              @click="setVisibleDialog(false);"
               class="el-dialog__headerbtn"
             >
               <i class="el-dialog__close el-icon el-icon-close"></i>
@@ -72,7 +72,7 @@
           </section>
           <footer class="modal-footer">
             <span slot="footer" class="dialog-footer">
-              <el-button @click="closeDialog();">Tutup</el-button>
+              <el-button @click="setVisibleDialog(false);">Tutup</el-button>
 
               <el-button type="primary" @click="create(form_unitasal);">
                 Simpan</el-button
@@ -99,13 +99,23 @@ export default {
         kelas: "",
         keterangan: "",
         status: ""
-      },
-      jenisUnitAsal: []
+      }
     };
   },
+  computed: {
+    ...mapState({
+      visibleDialogAdd: state => state.FormInputUnitAsal.visibleDialogAdd,
+      jenisUnitAsal: state => state.FormInputUnitAsal.jenisUnitAsal
+    })
+  },
+
   methods: {
     ...mapActions({
-      create: "DashboardUnitAsal/createUnitAsal"
+      create: "FormInputUnitAsal/createUnitAsal",
+      showJenis: "FormInputUnitAsal/showJenis"
+    }),
+    ...mapMutations({
+      setVisibleDialog: "FormInputUnitAsal/SET_VISIBLE_DIALOG"
     }),
     closeDialog() {
       this.$emit("closeDialogAdd");
@@ -122,19 +132,20 @@ export default {
     // }
   },
   mounted() {
-    axios
-      .get("/api/v1/jenis_unit_asal/read?nama=&page=0&page_size=20")
-      .then(response => {
-        console.log(JSON.stringify(response.data));
-        response.data.payload.forEach(jenis => {
-          this.jenisUnitAsal.push({
-            id: jenis.id,
-            kode: jenis.kode,
-            nama: jenis.nama,
-            status: jenis.status
-          });
-        });
-      });
+    this.showJenis();
+    // axios
+    //   .get("/api/v1/jenis_unit_asal/read?nama=&page=0&page_size=20")
+    //   .then(response => {
+    //     console.log(JSON.stringify(response.data));
+    //     response.data.payload.forEach(jenis => {
+    //       this.jenisUnitAsal.push({
+    //         id: jenis.id,
+    //         kode: jenis.kode,
+    //         nama: jenis.nama,
+    //         status: jenis.status
+    //       });
+    //     });
+    //   });
   }
 };
 </script>
